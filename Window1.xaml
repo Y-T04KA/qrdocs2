@@ -1,0 +1,135 @@
+﻿<Window x:Class="qrdocs.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:qrdocs"
+        mc:Ignorable="d"
+        Title="Режим пользователя" Height="600" Width="800">
+    <Grid>
+        <TextBox x:Name="SenderName" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" FontSize="20" FontFamily="Microsoft Sans Serif" TextChanged="SenderName_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="ФИО отправителя" Foreground="Gray" FontSize="20" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="AddresseeName" HorizontalAlignment="Left" Height="50" Margin="10,64,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" FontSize="20" FontFamily="Microsoft Sans Serif" TextChanged="AddresseeName_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="ФИО руководителя-адресата" Foreground="Gray" FontSize="20"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="SenderAdress" HorizontalAlignment="Left" Height="50" Margin="10,119,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" FontFamily="Microsoft Sans Serif" FontSize="20" TextChanged="SenderAdress_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Адрес отправителя" Foreground="Gray" FontSize="20"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="SubmissionHeader" HorizontalAlignment="Left" Height="50" Margin="10,174,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" FontFamily="Microsoft Sans Serif" FontSize="20" TextChanged="SubmissionHeader_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Тема обращения" Foreground="Gray" FontSize="20"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="SubmissionText" HorizontalAlignment="Left" Height="200" Margin="10,229,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="600" FontFamily="Microsoft Sans Serif" FontSize="20" TextChanged="TextBox_TextChanged">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Текст обращения" Foreground="Gray" FontSize="20"/>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Button x:Name="SubmissionModeSendButton" Content="Отправить" HorizontalAlignment="Left" Height="70" Margin="130,464,0,0" VerticalAlignment="Top" Width="180" FontFamily="Microsoft Sans Serif" FontSize="20" Click="SubmissionModeSendButton_Click"/>
+        <Button x:Name="SubmissionModeExitButton" Content="Отменить" HorizontalAlignment="Left" Height="70" Margin="460,464,0,0" VerticalAlignment="Top" Width="180" FontFamily="Microsoft Sans Serif" FontSize="20" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Height="419" Margin="615,10,0,0" Text="В этом окне создаётся обращение" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" FontFamily="Microsoft Sans Serif" FontSize="20"/>
+
+    </Grid>
+</Window>
