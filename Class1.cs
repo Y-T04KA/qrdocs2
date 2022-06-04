@@ -10,46 +10,20 @@ using System.Windows;
 
 namespace qrdocs
 {
-    /*public class DAL
-    {
-        public static int executeQuery(string query)
-        {
-            // Initialization.  
-            int rowCount = 0;
-            string strConn = "Data Source=SQL Server Name(e.g. localhost);Database=SQL Database Name;User Id=SQL User Name;Password=SQL Password;";
-            var sqlConnection = new SqlConnection(strConn);
-            var sqlCommand = new SqlCommand();
-
-            try
-            {
-                // Settings.  
-                sqlCommand.CommandText = query;
-                sqlCommand.CommandType = CommandType.Text;
-                sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandTimeout = 12 * 3600; //// Setting timeeout for longer queries to 12 hours.  
-
-                // Open.  
-                sqlConnection.Open();
-
-                // Result.  
-                rowCount = sqlCommand.ExecuteNonQuery();
-
-                // Close.  
-                sqlConnection.Close();
-            }
-            catch (Exception ex)
-            {
-                // Close.  
-                sqlConnection.Close();
-
-                throw ex;
-            }
-
-            return rowCount;
-        }
-    }*/
     public class DBWorks
     {
+        public struct DBStruct
+        {
+            public object id;
+            public object username;
+            public object supervisorname;
+            public object adress;
+            public object themes;
+            public object content;
+            public object resolution;
+            public object appstatus;
+            public object note;
+        }
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
 
         public async void DBAppend(string eusername, string esupervisorname, string eadress, string ethemes, string econtent)
@@ -79,9 +53,26 @@ namespace qrdocs
                 }
             }   
         } 
-        public async void DBShow()
+        /*public async void DBShow()
         {
-            string sqlExpression = "";
-        }
+            string sqlExpression = "SELECT * FROM appdata";
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+              await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+                DBStruct DBS[] = new DBStruct;
+                if (reader.HasRows)
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        Object[] values = new Object[9];
+                        DBS = reader.GetValues(values);
+                         
+                    }
+                }
+
+            }
+        }*/
         }
 }
