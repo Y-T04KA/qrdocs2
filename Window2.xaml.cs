@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,7 +20,7 @@ namespace qrdocs
     /// </summary>
     public partial class Window2 : Window
     {
-        
+        public int id2qr;
 
         public Window2()
         {
@@ -32,7 +33,7 @@ namespace qrdocs
                 DataTable ds = new DataTable();
                 adapter.Fill(ds);
                 Submissions.ItemsSource = ds.DefaultView;
-                //Submissions.AutoGenerateColumns = true;
+                
 
             }
 
@@ -47,6 +48,24 @@ namespace qrdocs
         private void Submissions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int.TryParse(IDPicker.Text, out id2qr);
+            //MessageBox.Show(id2qr);
+            var qr = new DBWorks();
+            qr.DBGenerateQR(id2qr);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
