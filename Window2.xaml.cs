@@ -22,17 +22,21 @@ namespace qrdocs
             
              
         }
+        private SqlDataAdapter adapter;
+        private DataTable ds;
+        public string ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
         public void LoadEntries()
         {
             string sqlExpression = "SELECT * FROM appdata";
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter(sqlExpression, connection);
-                DataTable ds = new DataTable();
+                adapter = new SqlDataAdapter(sqlExpression, connection);
+                ds = new DataTable();
                 adapter.Fill(ds);
                 Submissions.ItemsSource = ds.DefaultView;
-
+                
+                
             }
         }
         public void Window_Loaded(object sender, RoutedEventArgs e)
@@ -42,7 +46,10 @@ namespace qrdocs
 
         private void Submissions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            SqlCommandBuilder comm = new SqlCommandBuilder(adapter);
+            adapter.Update(ds);
+            ds.Clear();
+            LoadEntries();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -67,6 +74,22 @@ namespace qrdocs
             var qr = new DBWorks();
             qr.DBreadQR();
             LoadEntries();
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window3 p = new Window3();
+            p.Show();
+            
+
+        }
+
+        private void ReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window2 newWindow = new Window2();
+            Application.Current.MainWindow = newWindow;
+            newWindow.Show();
+            this.Close();
         }
     }
 }

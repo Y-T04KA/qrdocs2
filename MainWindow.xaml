@@ -8,7 +8,7 @@
     <Grid>
         <Button x:Name="ToSubmissonMode" Content="Режим пользователя" HorizontalAlignment="Left" Height="79" Margin="76,64,0,0" VerticalAlignment="Top" Width="324" FontFamily="Microsoft Sans Serif" FontSize="20" Click="ToSubmissonMode_Click"/>
         <Button x:Name="ToOfficeMode" Content="Режим канцелярии" HorizontalAlignment="Left" Height="82" Margin="76,183,0,0" VerticalAlignment="Top" Width="324" FontFamily="Microsoft Sans Serif" FontSize="20" Click="ToOfficeMode_Click"/>
-        <Button x:Name="ToManagerMode" Content="Режим руководителя" HorizontalAlignment="Left" Height="82" Margin="76,304,0,0" VerticalAlignment="Top" Width="324" FontFamily="Microsoft Sans Serif" FontSize="20"/>
+        <Button x:Name="ToManagerMode" Content="Режим руководителя" HorizontalAlignment="Left" Height="82" Margin="76,304,0,0" VerticalAlignment="Top" Width="324" FontFamily="Microsoft Sans Serif" FontSize="20" Click="ToManagerMode_Click"/>
         <TextBlock HorizontalAlignment="Left" Height="335" Margin="479,64,0,0" Text="Стартовый экран программы, где выбирается режим работы. В режиме пользователя заполняется обращение. В режиме канцелярии происходит обработка обращений. В режиме руководителя обращения рассматриваются." TextWrapping="Wrap" VerticalAlignment="Top" Width="256" FontSize="20" FontFamily="Microsoft Sans Serif"/>
 
     </Grid>

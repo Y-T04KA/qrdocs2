@@ -41,6 +41,11 @@ namespace qrdocs
         private void SubmissionModeSendButton_Click(object sender, RoutedEventArgs e)
         {
             var append = new DBWorks();
+            if (username=="" || username == null) { MessageBox.Show("Поле отправителя не может быть пустым!"); return; }
+            if (supervisorname=="" || supervisorname==null) { MessageBox.Show("Поле получателя не может быть пустым!"); return; }
+            if (adress == "" || adress == null) { MessageBox.Show("Поле адреса не может быть пустым!"); return; }
+            if (themes == "" || themes == null) { MessageBox.Show("Поле темы не может быть пустым!"); return; }
+            if (content == "" || content == null) { MessageBox.Show("Текст обращения не может быть пустым!"); return; }
             append.DBAppend(username, supervisorname, adress, themes, content);
         }
 

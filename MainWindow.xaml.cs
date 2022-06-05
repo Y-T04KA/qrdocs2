@@ -35,5 +35,11 @@ namespace qrdocs
             Window2 p = new Window2();
             p.Show();
         }
+
+        private void ToManagerMode_Click(object sender, RoutedEventArgs e)
+        {
+            Window4 p = new Window4();
+            p.Show();
+        }
     }
 }

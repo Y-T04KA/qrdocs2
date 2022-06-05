@@ -246,5 +246,135 @@ namespace qrdocs
                 }
             }
         }
+        public async void DBUpdateUsername(int id, string username)
+        {
+            string SqlExpression = "UPDATE appdata SET username=@username WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("username", username);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении Заявителя"); }
+            }
+        }
+        public async void DBUpdateSname(int id, string supervisorname)
+        {
+            string SqlExpression = "UPDATE appdata SET supervisorname=@supervisorname WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("supervisorname", supervisorname);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении Адресата"); }
+            }
+        }
+        public async void DBUpdateAdress(int id, string adress)
+        {
+            string SqlExpression = "UPDATE appdata SET adress=@adress WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("adress", adress);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении адреса"); }
+            }
+        }
+        public async void DBUpdateThemes(int id, string themes)
+        {
+            string SqlExpression = "UPDATE appdata SET themes=@themes WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("themes", themes);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении темы"); }
+            }
+        }
+        public async void DBUpdateContent(int id, string content)
+        {
+            string SqlExpression = "UPDATE appdata SET content=@content WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("content", content);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении текста"); }
+            }
+        }
+        public async void DBUpdateResolution(int id, string resolution)
+        {
+            string SqlExpression = "UPDATE appdata SET resolution=@resolution WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("resolution", resolution);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении решения"); }
+            }
+        }
+        public async void DBUpdateStatus(int id, int status)
+        {
+            string SqlExpression = "UPDATE appdata SET appstatus=@appstatus WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("appstatus", status);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении статуса"); }
+            }
+        }
+        public async void DBUpdateNote(int id, string note)
+        {
+            string SqlExpression = "UPDATE appdata SET note=@note WHERE id=@id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(SqlExpression, connection);
+                SqlParameter idParam = new SqlParameter("id", id);
+                command.Parameters.Add(idParam);
+                SqlParameter nameParam = new SqlParameter("note", note);
+                command.Parameters.Add(nameParam);
+                int number = await command.ExecuteNonQueryAsync();
+                if (number == 0) { MessageBox.Show("Ошибка при изменении примечания"); }
+            }
+        }
+        public int maxID()
+        {
+            string sqlExpression = "SELECT MAX(id) FROM appdata";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                return (int)command.ExecuteScalar();
+            }
+        }   
     }
 }
