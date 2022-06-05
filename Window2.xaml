@@ -68,8 +68,9 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Выдать запрос на печать" HorizontalAlignment="Left" Height="80" Margin="1320,99,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="Button_Click"/>
-        <Button Content="Внести запрос" HorizontalAlignment="Left" Height="80" Margin="1320,224,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif"/>
-        <TextBox x:Name="IDPicker" TextWrapping="Wrap" Text="Введите номер обращения для печати" Margin="1320,24,40,800" TextChanged="TextBox_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <Button Content="Выдать запрос на печать" HorizontalAlignment="Left" Height="80" Margin="1320,144,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="Button_Click"/>
+        <Button x:Name="ImportQR" Content="Внести запрос" HorizontalAlignment="Left" Height="80" Margin="1320,259,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="ImportQR_Click"/>
+        <TextBox x:Name="IDPicker" Text="0" Margin="1320,10,40,810" TextChanged="TextBox_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBlock HorizontalAlignment="Left" Height="33" Margin="1320,74,0,0" TextWrapping="Wrap" Text="Введите выше номер обращения для печати" VerticalAlignment="Top" Width="240"/>
     </Grid>
 </Window>

@@ -1,17 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace qrdocs
 {
@@ -25,6 +17,13 @@ namespace qrdocs
         public Window2()
         {
             InitializeComponent();
+            LoadEntries();
+
+            
+             
+        }
+        public void LoadEntries()
+        {
             string sqlExpression = "SELECT * FROM appdata";
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -33,12 +32,8 @@ namespace qrdocs
                 DataTable ds = new DataTable();
                 adapter.Fill(ds);
                 Submissions.ItemsSource = ds.DefaultView;
-                
 
             }
-
-            
-             
         }
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -53,7 +48,6 @@ namespace qrdocs
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             int.TryParse(IDPicker.Text, out id2qr);
-            //MessageBox.Show(id2qr);
             var qr = new DBWorks();
             qr.DBGenerateQR(id2qr);
         }
@@ -66,6 +60,13 @@ namespace qrdocs
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void ImportQR_Click(object sender, RoutedEventArgs e)
+        {
+            var qr = new DBWorks();
+            qr.DBreadQR();
+            LoadEntries();
         }
     }
 }
