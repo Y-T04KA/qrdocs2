@@ -69,10 +69,16 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Height="40" Margin="1300,24,0,0" TextWrapping="Wrap" Text="Введите номер обращения, с которым работаете:" VerticalAlignment="Top" Width="280"/>
-        <TextBox x:Name="idBox" HorizontalAlignment="Left" Height="20" Margin="1300,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280"/>
+        <TextBox x:Name="idBox" HorizontalAlignment="Left" Height="20" Margin="1300,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280" TextChanged="idBox_TextChanged" PreviewTextInput="idValidationTextBox"/>
         <TextBlock HorizontalAlignment="Left" Height="20" Margin="1300,84,0,0" TextWrapping="Wrap" Text="Выберите статус:" VerticalAlignment="Top" Width="280"/>
-        <RadioButton x:Name="RejectedRB" Content="Отклонено" HorizontalAlignment="Left" Height="20" Margin="1450,104,0,0" VerticalAlignment="Top" Width="140"/>
-        <RadioButton x:Name="AcknowledgedRB" Content="Рассмотрено" HorizontalAlignment="Left" Height="20" Margin="1300,104,0,0" VerticalAlignment="Top" Width="140" IsChecked="True"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Margin="1300,139,0,0" TextWrapping="Wrap" Text="Выберите статус:" VerticalAlignment="Top" Width="280"/>
+        <RadioButton x:Name="RejectedRB" Content="Отклонено" HorizontalAlignment="Left" Height="20" Margin="1450,104,0,0" VerticalAlignment="Top" Width="140" Checked="RejectedRB_Checked"/>
+        <RadioButton x:Name="AcknowledgedRB" Content="Рассмотрено" HorizontalAlignment="Left" Height="20" Margin="1300,104,0,0" VerticalAlignment="Top" Width="140" IsChecked="True" Checked="AcknowledgedRB_Checked"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="1300,139,0,0" TextWrapping="Wrap" Text="Текст резолюции:" VerticalAlignment="Top" Width="280"/>
+        <TextBox x:Name="ResolutionBox" HorizontalAlignment="Left" Height="140" Margin="1300,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280" TextChanged="ResolutionBox_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Height="30" Margin="1300,324,0,0" TextWrapping="Wrap" Text="Текст примечания:" VerticalAlignment="Top" Width="280"/>
+        <TextBox x:Name="NoteBox" HorizontalAlignment="Left" Height="110" Margin="1300,354,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280" TextChanged="NoteBox_TextChanged"/>
+        <Button x:Name="ResetButton" Content="Обновить таблицу" HorizontalAlignment="Left" Height="60" Margin="1300,784,0,0" VerticalAlignment="Top" Width="280" Click="ResetButton_Click"/>
+        <Button x:Name="SubmitButton" Content="Сохранить решение" HorizontalAlignment="Left" Height="60" Margin="1300,684,0,0" VerticalAlignment="Top" Width="280" Click="SubmitButton_Click"/>
+
     </Grid>
 </Window>
