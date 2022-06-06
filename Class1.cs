@@ -218,8 +218,9 @@ namespace qrdocs
             filed.ShowDialog();
             string fil = filed.FileName;
             if (fil.Length == 0) return;
-            string[] check = fil.Split(".");            
-            if (check[1] != "png") {//большой компромисс - в идеале надо смотреть размер массива и там проверять расширение
+            string[] check = fil.Split("."); 
+            int lenght = check.Length;
+            if (check[lenght-1] != "png") {
                 int dpi = 300;
                 string workaround = @"D:\test\temp.png";
                 GhostscriptVersionInfo gvi = new GhostscriptVersionInfo(@"D:\test\gsdll64.dll");
@@ -291,26 +292,18 @@ namespace qrdocs
                     return;
                 }                         
                     int id;
-                    int.TryParse(data[0], out id);
-                    string username = data[1];
-                    string supervisorname = data[2];
-                    string adress = data[3];
-                    string themes = data[4];
-                    string content = data[5];
-                    string resolution = data[6];
+                    int.TryParse(data[0], out id);                    
                     int appstatus;
-                    int.TryParse(data[7], out appstatus);
-                    string note = data[8];
-                
+                    int.TryParse(data[7], out appstatus);                  
                     if (IDcheck(id))
                     {
                         MessageBoxResult res = MessageBox.Show("В базе уже есть запись с таким номером. Перезаписать?", "Обновить?", MessageBoxButton.YesNo);
-                        if (res == MessageBoxResult.Yes) { DBUpdate(id, username, supervisorname, adress, themes, content, resolution, appstatus, note); } else return;
+                        if (res == MessageBoxResult.Yes) { DBUpdate(id, data[1], data[2], data[3], data[4], data[5], data[6], appstatus, data[8]); } else return;
                     }
                     else
                     {
                         MessageBoxResult res = MessageBox.Show("Будет добавлена новая запись", "Добавить?", MessageBoxButton.YesNo);
-                        if (res == MessageBoxResult.Yes) { DBAppendFull(username, supervisorname, adress, themes, content, resolution, appstatus, note); } else return;
+                        if (res == MessageBoxResult.Yes) { DBAppendFull(data[1], data[2], data[3], data[4], data[5], data[6], appstatus, data[8]); } else return;
                     }
                 
                 

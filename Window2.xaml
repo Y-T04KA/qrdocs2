@@ -9,57 +9,57 @@
     <Grid>
         <DataGrid Name="Submissions" ItemsSource="{Binding}" AutoGenerateColumns="False" MaxWidth="1600" MaxHeight="900" HorizontalAlignment="Left" VerticalAlignment="Top" Height="874" Width="1270" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер" Binding="{Binding id}"/>
-                <DataGridTextColumn Header="Заявитель" Binding="{Binding username}" MaxWidth="100">
+                <DataGridTextColumn Header="Номер" Binding="{Binding id}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Заявитель" Binding="{Binding username}" MaxWidth="100" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Адресат" Binding="{Binding supervisorname}" MaxWidth="100">
+                <DataGridTextColumn Header="Адресат" Binding="{Binding supervisorname}" MaxWidth="100" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Адрес" Binding="{Binding adress}" MaxWidth="120">
+                <DataGridTextColumn Header="Адрес" Binding="{Binding adress}" MaxWidth="120" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Тема" Binding="{Binding themes}" MaxWidth="110">
+                <DataGridTextColumn Header="Тема" Binding="{Binding themes}" MaxWidth="110" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Текст обращения" Binding="{Binding content}" MaxWidth="380">
+                <DataGridTextColumn Header="Текст обращения" Binding="{Binding content}" MaxWidth="380" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Резолюция" Binding="{Binding resolution}" MaxWidth="120">
+                <DataGridTextColumn Header="Резолюция" Binding="{Binding resolution}" MaxWidth="120" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Статус" Binding="{Binding appstatus}" MaxWidth="50">
+                <DataGridTextColumn Header="Статус" Binding="{Binding appstatus}" MaxWidth="50" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Примечания" Binding="{Binding note}" MaxWidth="300">
+                <DataGridTextColumn Header="Примечания" Binding="{Binding note}" MaxWidth="300" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style>
                             <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
