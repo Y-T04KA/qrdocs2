@@ -92,5 +92,12 @@ namespace qrdocs
             newWindow.Show();
             this.Close();
         }
+
+        private void ReloadButton_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow p = new MainWindow();
+            p.Show();
+            Close();
+        }
     }
 }

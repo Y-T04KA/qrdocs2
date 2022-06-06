@@ -30,10 +30,11 @@ namespace qrdocs
 
         private SqlDataAdapter adapter;
         private DataTable ds;
+        public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=rudb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public void LoadEntries()
         {
             string sqlExpression = "SELECT * FROM appdata";
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+            //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 adapter = new SqlDataAdapter(sqlExpression, connection);
@@ -119,6 +120,13 @@ namespace qrdocs
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void ResetButton_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow p = new MainWindow();
+            p.Show();
+            Close();
         }
     }
 }

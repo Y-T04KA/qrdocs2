@@ -73,6 +73,7 @@
         <TextBox x:Name="IDPicker" Text="0" Margin="1320,10,40,810" TextChanged="TextBox_TextChanged" PreviewTextInput="NumberValidationTextBox"/>
         <TextBlock HorizontalAlignment="Left" Height="33" Margin="1320,74,0,0" TextWrapping="Wrap" Text="Введите выше номер обращения, с которым работать" VerticalAlignment="Top" Width="240"/>
         <Button x:Name="EditButton" Content="Редактировать записи" HorizontalAlignment="Left" Height="80" Margin="1320,244,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="EditButton_Click"/>
-        <Button x:Name="ReloadButton" Content="Обновить таблицу" HorizontalAlignment="Left" Height="80" Margin="1320,764,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="ReloadButton_Click"/>
+        <Button x:Name="ReloadButton" Content="Обновить таблицу" HorizontalAlignment="Left" Height="80" Margin="1320,442,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="ReloadButton_Click"/>
+        <Button x:Name="ReloadButton_Copy" Content="В главное меню" HorizontalAlignment="Left" Height="80" Margin="1320,544,0,0" VerticalAlignment="Top" Width="240" FontSize="20" FontFamily="Microsoft Sans Serif" Click="ReloadButton_Copy_Click"/>
     </Grid>
 </Window>

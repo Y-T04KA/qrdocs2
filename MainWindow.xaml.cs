@@ -28,18 +28,21 @@ namespace qrdocs
         {
             Window1 p = new Window1();
             p.Show();
+            Close();
         }
 
         private void ToOfficeMode_Click(object sender, RoutedEventArgs e)
         {
             Window2 p = new Window2();
             p.Show();
+            Close();
         }
 
         private void ToManagerMode_Click(object sender, RoutedEventArgs e)
         {
             Window4 p = new Window4();
             p.Show();
+            Close();
         }
     }
 }

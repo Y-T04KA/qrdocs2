@@ -12,6 +12,11 @@ using Ghostscript.NET.Rasterizer;
 using Ghostscript.NET;
 using System.Drawing.Imaging;
 using iText.Kernel.Font;
+using ZXing;
+using System.Text;
+using System.Collections.Generic;
+using ZXing.Common;
+using ZXing.Windows.Compatibility;
 
 namespace qrdocs
 {
@@ -186,37 +191,24 @@ namespace qrdocs
 
             }
         }
-        private void MakeQR(string qrstring,object id2)
+        private void MakeQR(string qrstring1,object id2)
         {
-            var writer = new ZXing.BarcodeWriterPixelData
-            {
-                Format = ZXing.BarcodeFormat.QR_CODE,
-                Options = new QrCodeEncodingOptions
-                {
-                    Height = 450,
-                    Width = 450,
-                    Margin = 0
-                }
-            };
-            var pixeldata = writer.Write(qrstring);
-            using (var bitmap = new System.Drawing.Bitmap(pixeldata.Width, pixeldata.Height, System.Drawing.Imaging.PixelFormat.Format32bppRgb))
-            {
-                using (var ms = new MemoryStream())
-                {
-                    var bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, pixeldata.Width, pixeldata.Height), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-                    try
-                    {
-                        System.Runtime.InteropServices.Marshal.Copy(pixeldata.Pixels, 0, bitmapData.Scan0, pixeldata.Pixels.Length);
-                    }
-                    finally
-                    {
-                        bitmap.UnlockBits(bitmapData);
-                    }
-                    string filename = String.Format("D://test/{0}.png", id2);
-                    bitmap.Save(filename, System.Drawing.Imaging.ImageFormat.Png);
-                    MessageBox.Show("Файл создан");
-                }
-            }
+            string qrstring = Encoding.UTF8.GetString(Encoding.Default.GetBytes(qrstring1));
+            QRCodeWriter qrEncode = new QRCodeWriter();
+            Dictionary<EncodeHintType, object> hints = new Dictionary<EncodeHintType, object>();    //для колекции поведений
+            hints.Add(EncodeHintType.CHARACTER_SET, "utf-8");   //добавление в коллекцию кодировки utf-8
+            BitMatrix qrMatrix = qrEncode.encode(   //создание матрицы QR
+                qrstring,                 //кодируемая строка
+                BarcodeFormat.QR_CODE,  //формат кода, т.к. используется QRCodeWriter применяется QR_CODE
+                450,                    //ширина
+                450,                    //высота
+                hints);                 //применение колекции поведений
+
+            BarcodeWriter qrWrite = new BarcodeWriter();    //класс для кодирования QR в растровом файле
+            Bitmap qrImage = qrWrite.Write(qrMatrix);   //создание изображения
+            string filename = String.Format("D://test/{0}.png", id2);
+            qrImage.Save(filename, System.Drawing.Imaging.ImageFormat.Png);//сохранение изображения
+            
         }
         
         public void DBreadQR()
@@ -229,7 +221,7 @@ namespace qrdocs
             string[] check = fil.Split(".");            
             if (check[1] != "png") {//большой компромисс - в идеале надо смотреть размер массива и там проверять расширение
                 int dpi = 300;
-                string workaround = @"D:\temp.png";
+                string workaround = @"D:\test\temp.png";
                 GhostscriptVersionInfo gvi = new GhostscriptVersionInfo(@"D:\test\gsdll64.dll");
                 using (var rasterizer = new GhostscriptRasterizer())
                 {
@@ -268,8 +260,8 @@ namespace qrdocs
                 int appstatus;
                 int.TryParse(data[7], out appstatus);
                 string note = data[8];
-
-                if (IDcheck(id))
+                int id2 = id;
+                if (IDcheck(id2))
                 {
                     MessageBoxResult res = MessageBox.Show("В базе уже есть запись с таким номером. Перезаписать?", "Обновить?", MessageBoxButton.YesNo);
                     if (res == MessageBoxResult.Yes) { DBUpdate(id, username, supervisorname, adress, themes, content, resolution, appstatus, note); } else return;
@@ -347,7 +339,7 @@ namespace qrdocs
         }
         public async void DBUpdate(int id, string username, string supervisorname, string adress, string themes, string content, string resolution, int appstatus, string note)
         {
-            string SqlExpression = "UPDATE appdata SET username=@username, adress=@adress, themes=@themes, content=@content, resolution=@resolution, appstatus=@appstatus,note=@note WHERE id=@id";
+            string SqlExpression = "UPDATE appdata SET username=@username,supervisorname=@supervisorname, adress=@adress, themes=@themes, content=@content, resolution=@resolution, appstatus=@appstatus,note=@note WHERE id=@id";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();

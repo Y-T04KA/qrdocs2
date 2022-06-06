@@ -35,6 +35,8 @@ namespace qrdocs
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow p = new MainWindow();
+            p.Show();
             Close();
         }
 

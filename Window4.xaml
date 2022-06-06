@@ -77,8 +77,9 @@
         <TextBox x:Name="ResolutionBox" HorizontalAlignment="Left" Height="140" Margin="1300,164,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280" TextChanged="ResolutionBox_TextChanged"/>
         <TextBlock HorizontalAlignment="Left" Height="30" Margin="1300,324,0,0" TextWrapping="Wrap" Text="Текст примечания:" VerticalAlignment="Top" Width="280"/>
         <TextBox x:Name="NoteBox" HorizontalAlignment="Left" Height="110" Margin="1300,354,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="280" TextChanged="NoteBox_TextChanged"/>
-        <Button x:Name="ResetButton" Content="Обновить таблицу" HorizontalAlignment="Left" Height="60" Margin="1300,784,0,0" VerticalAlignment="Top" Width="280" Click="ResetButton_Click"/>
-        <Button x:Name="SubmitButton" Content="Сохранить решение" HorizontalAlignment="Left" Height="60" Margin="1300,684,0,0" VerticalAlignment="Top" Width="280" Click="SubmitButton_Click"/>
+        <Button x:Name="ResetButton" Content="Обновить таблицу" HorizontalAlignment="Left" Height="60" Margin="1300,644,0,0" VerticalAlignment="Top" Width="280" Click="ResetButton_Click"/>
+        <Button x:Name="SubmitButton" Content="Сохранить решение" HorizontalAlignment="Left" Height="60" Margin="1300,544,0,0" VerticalAlignment="Top" Width="280" Click="SubmitButton_Click"/>
+        <Button x:Name="ResetButton_Copy" Content="В главное меню" HorizontalAlignment="Left" Height="60" Margin="1300,749,0,0" VerticalAlignment="Top" Width="280" Click="ResetButton_Copy_Click"/>
 
     </Grid>
 </Window>

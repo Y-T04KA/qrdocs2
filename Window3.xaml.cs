@@ -117,6 +117,8 @@ namespace qrdocs
                 if (adress == "" || adress == null) { MessageBox.Show("Поле адреса не может быть пустым!"); return; }
                 if (themes == "" || themes == null) { MessageBox.Show("Поле темы не может быть пустым!"); return; }
                 if (content == "" || content == null) { MessageBox.Show("Текст обращения не может быть пустым!"); return; }
+                if (resolution == null) { resolution = ""; }
+                if (note == null) { note = ""; }
                 string promt = String.Format("Будет создана новая запись под номером {0}", check+1);
                 MessageBoxResult res = MessageBox.Show(promt, "Создать новую запись?", MessageBoxButton.YesNo);
                 if (res == MessageBoxResult.Yes) { DB.DBAppendFull(username, supervisorname, adress, themes, content, resolution, appstatus, note); }
