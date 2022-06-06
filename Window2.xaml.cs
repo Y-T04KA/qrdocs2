@@ -24,7 +24,8 @@ namespace qrdocs
         }
         private SqlDataAdapter adapter;
         private DataTable ds;
-        public string ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
+        public string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=rudb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //public string ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\podelki\legacy\qrdocs\Database1.mdf;Integrated Security=True;Connect Timeout=30";
         public void LoadEntries()
         {
             string sqlExpression = "SELECT * FROM appdata";

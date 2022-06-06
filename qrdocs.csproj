@@ -5,7 +5,12 @@
     <TargetFramework>net6.0-windows10.0.17763.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>8.0</SupportedOSPlatformVersion>
+    <ApplicationIcon>bin\Release\net6.0-windows10.0.17763.0\Pop cat closed.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Release\net6.0-windows10.0.17763.0\Pop cat closed.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Ghostscript.NET" Version="1.2.3" />
