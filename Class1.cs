@@ -5,6 +5,13 @@ using System.IO;
 using ZXing.QrCode;
 using Microsoft.Win32;
 using System.Drawing;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.IO.Image;
+using Ghostscript.NET.Rasterizer;
+using Ghostscript.NET;
+using System.Drawing.Imaging;
+using iText.Kernel.Font;
 
 namespace qrdocs
 {
@@ -98,13 +105,85 @@ namespace qrdocs
                         object note = reader["note"];
                         string qrstring = String.Format("{0}#;{1}#;{2}#;{3}#;{4}#;{5}#;{6}#;{7}#;{8}",id2,username,supervisorname,adress,themes,content,resolution,appstatus,note);
                         MakeQR(qrstring, id2);
-                        
+                        MessageBoxResult res = MessageBox.Show("Создать файл для печати?", "", MessageBoxButton.OKCancel);
+                        if (res == MessageBoxResult.OK) { MakePDF(qrstring,id); }
                        }
                 } else
                 {
                     MessageBox.Show("Обращение не найдено");
                 }
                 
+            }
+        }
+        private void MakePDF(string qrstring, int n)
+        {
+            string fil = String.Format("D://test/{0}.png",n);
+            string dest = String.Format("D://test/{0}.pdf",n);
+            ///
+            string[] data = qrstring.Split("#;");
+            string id = String.Format("Номер заявления — {0}", data[0]);
+            string username = String.Format("Имя заявителя - {0}", data[1]);
+            string supervisorname = String.Format("Имя руководителя - {0}",data[2]);
+            string adress = String.Format("Адрес - {0}",data[3]);
+            string themes = String.Format("Тема заявления - {0}",data[4]);
+            string content = String.Format("Текст заявления - {0}",data[5]);
+            string resolution;
+            if (data[6] == "")
+            {
+                resolution = "Резолюция - отсутствует";
+            } else
+            {
+                resolution = String.Format("Резолюция - {0}", data[6]);
+            }
+            string appstatus = data[7];
+            switch (appstatus)
+            {
+                case "0":
+                    appstatus = "Статус - Принято";
+                    break; 
+                case "1":
+                    appstatus = "Статус - Рассмотрено";
+                    break ;
+                case "2": 
+                    appstatus = "Статус - Отклонено";
+                    break;
+            }
+            string note;
+            if (data[8] == "")
+            {
+                note = "Примечание - отсутствует";
+            }
+            else
+            {
+                note = String.Format("Примечание - {0}", data[8]);
+            }
+            //
+            if (fil == "") { return; } else
+            {
+                PdfWriter writer = new PdfWriter(dest);
+                PdfDocument pdfDoc = new PdfDocument(writer);
+                pdfDoc.AddNewPage();
+                
+                Document document = new Document(pdfDoc);
+                ImageData picture = ImageDataFactory.Create(fil);
+                iText.Layout.Element.Image img = new iText.Layout.Element.Image(picture);
+                document.Add(img);
+                PdfFont font = PdfFontFactory.CreateFont(@"C:\\Windows\Fonts\times.ttf", "Identity-H");
+                iText.Layout.Element.List list = new iText.Layout.Element.List();
+                list.Add(id);
+                list.Add(username);
+                list.Add(supervisorname);
+                list.Add(adress);
+                list.Add(themes);
+                list.Add(content);
+                list.Add(resolution);
+                list.Add(appstatus);
+                list.Add(note);
+                list.SetFont(font);
+                document.Add(list);
+                
+                document.Close();
+
             }
         }
         private void MakeQR(string qrstring,object id2)
@@ -139,16 +218,72 @@ namespace qrdocs
                 }
             }
         }
+        
         public void DBreadQR()
         {
             var reader = new ZXing.Windows.Compatibility.BarcodeReader();
             OpenFileDialog filed = new OpenFileDialog();
             filed.ShowDialog();
             string fil = filed.FileName;
-            if (fil == "") { return; }
+            if (fil.Length == 0) return;
+            string[] check = fil.Split(".");            
+            if (check[1] != "png") {//большой компромисс - в идеале надо смотреть размер массива и там проверять расширение
+                int dpi = 300;
+                string workaround = @"D:\temp.png";
+                GhostscriptVersionInfo gvi = new GhostscriptVersionInfo(@"D:\test\gsdll64.dll");
+                using (var rasterizer = new GhostscriptRasterizer())
+                {
+                    rasterizer.Open(fil, gvi, false);
+                    for (var pageNumber = 1; pageNumber <= rasterizer.PageCount; pageNumber++)
+                    {
+                        var pageFilePath = Path.Combine(@"D:\test\", string.Format("temp.png", pageNumber));
+                        var img = rasterizer.GetPage(dpi, pageNumber);
+                        img.Save(pageFilePath, ImageFormat.Png);
+                    }
+                    }
+                var barcodeBitmap = (Bitmap)Image.FromFile(workaround);
+                reader.AutoRotate = true;
+                var result0 = reader.Decode(barcodeBitmap);
+                string result;
+                if (result0 != null) { result = result0.ToString(); } else { MessageBox.Show("С QR-кодом что-то не так"); return; }
+                string[] data = new string[8];
+                data = result.Split("#;");
+                try
+                {
+                    int q = data[5].Length;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    MessageBox.Show("Информация для обработки не найдена");
+                    return;
+                }
+                int id;
+                int.TryParse(data[0], out id);
+                string username = data[1];
+                string supervisorname = data[2];
+                string adress = data[3];
+                string themes = data[4];
+                string content = data[5];
+                string resolution = data[6];
+                int appstatus;
+                int.TryParse(data[7], out appstatus);
+                string note = data[8];
+
+                if (IDcheck(id))
+                {
+                    MessageBoxResult res = MessageBox.Show("В базе уже есть запись с таким номером. Перезаписать?", "Обновить?", MessageBoxButton.YesNo);
+                    if (res == MessageBoxResult.Yes) { DBUpdate(id, username, supervisorname, adress, themes, content, resolution, appstatus, note); } else return;
+                }
+                else
+                {
+                    MessageBoxResult res = MessageBox.Show("Будет добавлена новая запись", "Добавить?", MessageBoxButton.YesNo);
+                    if (res == MessageBoxResult.Yes) { DBAppendFull(username, supervisorname, adress, themes, content, resolution, appstatus, note); } else return;
+                }
+            }
             else
             {
                 var barcodeBitmap = (Bitmap)Image.FromFile(fil);
+                reader.AutoRotate = true;
                 var result0 = reader.Decode(barcodeBitmap);
                 string result;
                 if (result0 != null) { result = result0.ToString(); } else { MessageBox.Show("С QR-кодом что-то не так"); return; }
